@@ -1,6 +1,30 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+//const {app, BrowserWindow} = require('electron')
+//const path = require('path')
+
+const {app, BrowserWindow,Menu,MenuItem} = require('electron')
+const url = require('url')
 const path = require('path')
+
+let win
+
+function createNewWindow() {
+   win = new BrowserWindow({width: 800, height: 600})
+   console.log("created new browser window!")
+   win.loadURL(url.format ({
+      pathname: path.join(__dirname, 'index.html'),
+      protocol: 'file:',
+      slashes: true
+   }))
+   console.log("inside create new window!")
+   win.webContents.openDevTools()
+}
+
+app.on('ready', createNewWindow)
+
+
+
+
 
 function createWindow () {
   // Create the browser window.
@@ -87,7 +111,7 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 })
 
-
+/*
 function addListener() {
 
     var activity = require('./activity.js').activity
@@ -116,3 +140,24 @@ function addListener() {
 }
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+/*<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <link href="./styles.css" rel="stylesheet">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    We are using Node.js <span id="node-version"></span>,
+    Chromium <span id="chrome-version"></span>,
+    and Electron <span id="electron-version"></span>.
+    <p id="demo">JavaScript can change HTML content.</p>
+
+    <button type="button" id="web_btn">Click Me!</button>
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>*/
