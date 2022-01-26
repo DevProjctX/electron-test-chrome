@@ -34,14 +34,18 @@ ipcMain.on('hotspot-event', (event, arg) => {
     await app.whenReady();
 
     try {
-                //addListener()
-            while(1){
-                const activeWin = require("active-win")
-                let winDetails = await activeWin()
-
-                let appWinTitle = winDetails.title
+            var k = 30    //addListener()
+            while(k){
+                const activeWindow = require("active-win-with-url")
+                //let winDetails = await activeWin()
+                console.log(await activeWindow());
+                k--
+                /*let appWinTitle = winDetails.title
                 let appName = winDetails.owner.path.split("/")[2].split(".")[0]
-                console.log(winDetails)
+                var s = ''
+                if( winDetails.url!=null ) s = winDetails.url
+                console.log(s)
+                k=k-1*/
                 }
             } catch (error) {
                 console.log(error)
