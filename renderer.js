@@ -4,3 +4,31 @@
 // `nodeIntegration` is turned off. Use `preload.js` to
 // selectively enable features needed in the rendering
 // process.
+console.log("i am in renderer!!");
+const { initializeApp } = require('firebase/app');
+const { getFirestore, collection, getDocs } = require('firebase/firestore');
+console.log("i am in renderer!!");
+const firebaseConfig = {
+    apiKey: "AIzaSyCFqdrDM-UZh8mOj12_AbdYu8qvzJE9Z5M",
+      authDomain: "personal-test-81fe1.firebaseapp.com",
+      databaseURL: "https://personal-test-81fe1-default-rtdb.firebaseio.com",
+      projectId: "personal-test-81fe1",
+      storageBucket: "personal-test-81fe1.appspot.com",
+      messagingSenderId: "175534480516",
+      appId: "1:175534480516:web:9cf8b0971d6ff0cfc6f6d1",
+      measurementId: "G-BZQJ4NKXGQ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function getCities(db) {
+        const citiesCol = collection(db, 'db-test');
+        const citySnapshot = await getDocs(citiesCol);
+        const cityList = citySnapshot.docs.map(doc => doc.data());
+        return cityList;
+        }
+
+    const listdb = getCities(db)
+
+    console.log(listdb);
