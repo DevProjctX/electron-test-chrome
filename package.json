@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/electron/electron-quick-start#readme",
   "dependencies": {
-    "firebase": "^9.6.4"
+    "firebase": "^9.7.0"
   }
 }
